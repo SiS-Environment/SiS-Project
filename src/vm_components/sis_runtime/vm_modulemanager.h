@@ -1,5 +1,5 @@
-#ifndef VM_LAUNCHER_H
-#define VM_LAUNCHER_H
+#ifndef VM_MODULE_MANAGER_H
+#define VM_MODULE_MANAGER_H
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -22,13 +22,13 @@ namespace vm {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// class CLauncher
+// class CModuleManager
 //
-class CLauncher final
+class CModuleManager final
 {
 public:// Constructor, Destructor
-	inline CLauncher( std::string const& strExecuteFilePath = std::string() );
-	~CLauncher() = default;
+	inline CModuleManager( std::string const& strExecuteFilePath = std::string() );
+	~CModuleManager() = default;
 
 public:// Interface Methodes
 	inline void Run();
@@ -43,16 +43,16 @@ private:// Contents
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// class CLauncher
+// class CModuleManager
 //
 
 // Constructor, Destructor
-inline CLauncher::CLauncher( std::string const& strExecuteFilePath )
+inline CModuleManager::CModuleManager( std::string const& strExecuteFilePath )
 	: m_cstrExecuteFilePath( strExecuteFilePath )
 {}
 
 // Interface Methodes
-inline void CLauncher::Run()
+inline void CModuleManager::Run()
 {
 	Run( m_cstrExecuteFilePath );
 }
@@ -65,4 +65,4 @@ inline void CLauncher::Run()
 } // namespace sis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#endif // VM_LAUNCHER_H
+#endif // VM_MODULE_MANAGER_H

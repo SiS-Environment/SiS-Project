@@ -1,11 +1,11 @@
-#ifndef VM_LAUNCHER_H
-#define VM_LAUNCHER_H
+#ifndef SIS_MODULE_H
+#define SIS_MODULE_H
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
 //	Includes
 //
-#include "vm_runtime_global.h"
+#include "sis_core_global.h"
 
 // STD Includes
 #include <iostream>
@@ -22,17 +22,17 @@ namespace vm {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// class CLauncher
+// class CModule
 //
-class CLauncher final
+class CModule final
 {
 public:// Constructor, Destructor
-	inline CLauncher( std::string const& strExecuteFilePath = std::string() );
-	~CLauncher() = default;
+	inline CModule( std::string const& strExecuteFilePath = std::string() );
+	~CModule() = default;
 
 public:// Interface Methodes
 	inline void Run();
-	static VM_RUNTIME_API void Run( std::string const& strExecuteFilePath );
+	static SIS_CORE_API void Run(std::string const& strExecuteFilePath);
 
 private:// Contents
 	std::string const m_cstrExecuteFilePath;
@@ -43,16 +43,16 @@ private:// Contents
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// class CLauncher
+// class CModule
 //
 
 // Constructor, Destructor
-inline CLauncher::CLauncher( std::string const& strExecuteFilePath )
+inline CModule::CModule( std::string const& strExecuteFilePath )
 	: m_cstrExecuteFilePath( strExecuteFilePath )
 {}
 
 // Interface Methodes
-inline void CLauncher::Run()
+inline void CModule::Run()
 {
 	Run( m_cstrExecuteFilePath );
 }
@@ -65,4 +65,4 @@ inline void CLauncher::Run()
 } // namespace sis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#endif // VM_LAUNCHER_H
+#endif // SIS_MODULE_H

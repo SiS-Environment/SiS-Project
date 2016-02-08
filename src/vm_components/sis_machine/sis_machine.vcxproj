@@ -138,7 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="vm_machine.cpp" />
     <ClCompile Include="vm_main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="vm_machine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

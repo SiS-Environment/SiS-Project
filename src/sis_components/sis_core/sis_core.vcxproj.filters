@@ -15,15 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="vm_main.cpp">
+    <ClCompile Include="sis_core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vm_machine.cpp">
+    <ClCompile Include="sis_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sis_core_global.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vm_machine.h">
+    <ClInclude Include="sis_core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_module.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_core_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
