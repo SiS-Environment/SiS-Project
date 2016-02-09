@@ -77,27 +77,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\</OutDir>
-    <IntDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\src\vm_components\$(MSBuildProjectName)\obj-win$(PlatformArchitecture)\</IntDir>
+    <IntDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\src\$(MSBuildProjectName)\obj-win$(PlatformArchitecture)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\</OutDir>
-    <IntDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\src\vm_components\$(MSBuildProjectName)\obj-win$(PlatformArchitecture)\</IntDir>
+    <IntDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\src\$(MSBuildProjectName)\obj-win$(PlatformArchitecture)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\</OutDir>
-    <IntDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\src\vm_components\$(MSBuildProjectName)\obj-win$(PlatformArchitecture)\</IntDir>
+    <IntDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\src\$(MSBuildProjectName)\obj-win$(PlatformArchitecture)\</IntDir>
     <LinkIncremental />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\</OutDir>
-    <IntDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\src\vm_components\$(MSBuildProjectName)\obj-win$(PlatformArchitecture)\</IntDir>
+    <IntDir>$(SolutionDir)..\..\build\$(Configuration)x$(PlatformArchitecture)\src\$(MSBuildProjectName)\obj-win$(PlatformArchitecture)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\sis_components\sis_core\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\sis_core\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SIS_RUNTIME_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -113,7 +114,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\sis_components\sis_core\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\sis_core\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SIS_RUNTIME_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -132,7 +134,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\sis_components\sis_core\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\sis_core\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SIS_RUNTIME_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -152,7 +155,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\sis_components\sis_core\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\sis_core\</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>SIS_RUNTIME_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

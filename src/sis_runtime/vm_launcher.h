@@ -32,7 +32,7 @@ public:// Constructor, Destructor
 
 public:// Interface Methodes
 	inline void Run();
-	static VM_RUNTIME_API void Run( std::string const& strExecuteFilePath );
+	static SIS_RUNTIME_API void Run(std::string const& strExecuteFilePath);
 
 private:// Contents
 	std::string const m_cstrExecuteFilePath;
