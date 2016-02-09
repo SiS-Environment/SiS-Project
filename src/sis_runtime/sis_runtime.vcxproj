@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="vm_contextmanager.h" />
     <ClInclude Include="vm_modulemanager.h" />
     <ClInclude Include="vm_launcher.h" />
     <ClInclude Include="vm_runtime_global.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="vm_contextmanager.cpp" />
     <ClCompile Include="vm_modulemanager.cpp" />
     <ClCompile Include="vm_launcher.cpp" />
     <ClCompile Include="vm_runtime_global.cpp" />

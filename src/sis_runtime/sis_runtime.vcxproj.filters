@@ -24,6 +24,9 @@
     <ClInclude Include="vm_modulemanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="vm_contextmanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vm_launcher.cpp">
@@ -33,6 +36,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vm_modulemanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vm_contextmanager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
