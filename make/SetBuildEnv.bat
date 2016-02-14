@@ -12,7 +12,7 @@ if (%SISConfiguration%)==(debug)
 else 
 (	set SISBuildPostfix=O	)
 
-call "%VSCOMNTOOLS:"=%..\..\VC\vcvarsall.bat" amd64
+#call "%VSCOMNTOOLS:"=%..\..\VC\vcvarsall.bat" amd64
 
 echo -- QTDIR set to %QTDIR%
 echo -- WORKING_ROOT set to %WORKING_ROOT%
@@ -22,3 +22,4 @@ echo -- BUILD_OUTPUT set to %BUILD_OUTPUT%
 echo -- SISConfiguration set to %SISConfiguration%
 echo -- SISPlatformArchitecture set to %SISPlatformArchitecture%
 echo -- SISBuildPostfix set to %SISBuildPostfix%
+pause

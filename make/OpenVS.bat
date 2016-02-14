@@ -3,5 +3,5 @@ set VSCOMNTOOLS="%VS120COMNTOOLS%"
 
 call SetBuildEnv.bat
 
-devenv
+call devenv
 pause
