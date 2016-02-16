@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{af14421c-30c8-47ce-b6c7-4b64b25624bb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sis_core.cpp">
@@ -24,6 +27,9 @@
     <ClCompile Include="sis_core_global.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sis_event.cpp">
+      <Filter>Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sis_core.h">
@@ -34,6 +40,12 @@
     </ClInclude>
     <ClInclude Include="sis_core_global.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_event.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_event_impl.h">
+      <Filter>Events</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

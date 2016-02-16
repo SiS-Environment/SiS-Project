@@ -30,7 +30,7 @@ public:// Constructor, Destructor
 	inline CModuleManager( std::string const& strExecuteFilePath = std::string() );
 	~CModuleManager() = default;
 
-public:// Interface Methodes
+public:// Interface Methods
 	inline void Run();
 	static SIS_RUNTIME_API void Run( std::string const& strExecuteFilePath );
 
@@ -51,7 +51,7 @@ inline CModuleManager::CModuleManager( std::string const& strExecuteFilePath )
 	: m_cstrExecuteFilePath( strExecuteFilePath )
 {}
 
-// Interface Methodes
+// Interface Methods
 inline void CModuleManager::Run()
 {
 	Run( m_cstrExecuteFilePath );

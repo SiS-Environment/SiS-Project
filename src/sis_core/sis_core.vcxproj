@@ -136,11 +136,14 @@
   <ItemGroup>
     <ClCompile Include="sis_core.cpp" />
     <ClCompile Include="sis_core_global.cpp" />
+    <ClCompile Include="sis_event.cpp" />
     <ClCompile Include="sis_module.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sis_core.h" />
     <ClInclude Include="sis_core_global.h" />
+    <ClInclude Include="sis_event.h" />
+    <ClInclude Include="sis_event_impl.h" />
     <ClInclude Include="sis_module.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

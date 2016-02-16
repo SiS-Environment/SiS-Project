@@ -31,7 +31,7 @@ public:// Constructor, Destructor
 	CMachine() = default;
 	~CMachine() = default;
 
-public:// Interface Methodes
+public:// Interface Methods
 
 private:// Contents
 
@@ -48,7 +48,7 @@ private:// Contents
 // Constructor, Destructor
 
 
-// Interface Methodes
+// Interface Methods
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

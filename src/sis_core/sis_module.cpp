@@ -18,7 +18,7 @@ namespace vm {
 // class CModule
 //
 
-// Interface Methodes
+// Interface Methods
 void CModule::Run( std::string const& strExecuteFilePath )
 {
 	std::cout << strExecuteFilePath;

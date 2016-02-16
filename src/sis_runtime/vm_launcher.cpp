@@ -18,7 +18,7 @@ namespace vm {
 // class CLauncher
 //
 
-// Interface Methodes
+// Interface Methods
 void CLauncher::Run( std::string const& strExecuteFilePath )
 {
 	std::cout << strExecuteFilePath;

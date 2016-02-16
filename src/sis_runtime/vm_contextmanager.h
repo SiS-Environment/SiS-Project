@@ -1,7 +1,5 @@
-
-
-#ifndef CONTEXT_MANAGER
-#define CONTEXT_MANAGER
+#ifndef VM_CONTEXT_MANAGER_H
+#define VM_CONTEXT_MANAGER_H
 
 ////////////////////////////////////////////////////////////////////////////
 //	includes
