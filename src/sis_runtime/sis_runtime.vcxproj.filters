@@ -33,6 +33,9 @@
     <ClInclude Include="vm_processor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="vm_buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vm_launcher.cpp">

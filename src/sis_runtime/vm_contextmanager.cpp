@@ -1,64 +1,62 @@
 #include "vm_contextmanager.h"
 
 
-namespace sis
-{
+namespace sis {
 
 
-namespace vm
-{
+namespace vm {
 
 
-const size_t CContextManager::SIZE = 1048576;
+const size_t CContextManager::s_cuSize = 1048576;
 
 
 CContextManager::CContextManager()
+	:m_oBuffer(s_cuSize)
 {
-	m_ptr = new char[SIZE];
-	m_pMarker = m_ptr;
+	m_uMarker=0;
 }
 
 
-CContext* CContextManager::Alloc(uint uStackSize)
+CContext* CContextManager::Alloc( uint uStackSize )
 {
 	CContext* pContext = nullptr;
-	uint uBlockSize = sizeof(CContext) + uStackSize;
-	if (uBlockSize <= m_oBuffer.getSize() - m_uMarker)
+	uint uBlockSize = sizeof( CContext ) + uStackSize + 1;
+	if ( uBlockSize <= m_oBuffer.getSize() - m_uMarker)
 	{
 		char* p = &m_oBuffer[m_uMarker];
-		CBuffer oStack(p, uStackSize);
-		pContext = new (p) CContext(oStack);
+		CStack oStack( p, uStackSize );
+		pContext = new (p)CContext( oStack );
 		m_uMarker += uBlockSize;
+		m_oBuffer[m_uMarker-1] = uBlockSize;
 	}
 	else
 	{
-		throw(std::logic_error(""));   // TODO
+		throw(std::logic_error( "" ));   // TODO
 	}
-
+	
 	return pContext;
 }
 
 
 
 
-void CContextManager::DeliteMem(CContext* pContext)
+void CContextManager::Free( CContext* pContext )
 {
-	t_ui size = m_stackSize.top();
-	if ((void*) pContext == (void*) (m_pMarker - size))
+	uint uBlockSize = m_oBuffer[m_uMarker-1];
+	char* pLastBlock = &m_oBuffer[m_uMarker - uBlockSize];
+	if ( (void*)pContext == (void*)pLastBlock )
 	{
-		m_stackSize.pop();
-		m_pMarker -= size;
+		m_uMarker -= uBlockSize; 
 	}
 	else
 	{
-		throw(std::logic_error(""));
+		throw(std::logic_error( "" ));    //TODO
 	}
 }
 
 
 CContextManager::~CContextManager()
 {
-	delete m_ptr;
 }
 
 
@@ -67,4 +65,3 @@ CContextManager::~CContextManager()
 
 
 } // namespace sis
-

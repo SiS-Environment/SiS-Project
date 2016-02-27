@@ -1,5 +1,5 @@
-#ifndef VM_CONTEXT_MANAGER_H
-#define VM_CONTEXT_MANAGER_H
+#ifndef CONTEXT_MANAGER
+#define CONTEXT_MANAGER
 
 ////////////////////////////////////////////////////////////////////////////
 //	includes
@@ -7,6 +7,7 @@
 //#include <cstdlib>
 #include <iostream>
 #include <stack>
+#include "vm_buffer.h"
 //
 ////////////////////////////////////////////////////////////////////////////
 
@@ -24,38 +25,35 @@ namespace vm {
 ////////////////////////////////////////////////////////////////////////////
 //
 typedef unsigned int uint;
-typedef unsigned int t_offset;
 //
 ////////////////////////////////////////////////////////////////////////////
-class CBuffer
-{
-public:
-	typedef uint t_size;
-	CBuffer( t_size nSize = 0 );
-	inline CBuffer( char* pBuffer, uint uSize );
-public:
-	inline char& operator[]( t_size );
-	inline t_size getSize() const;
-private:
-	char*	m_pBuffer;
-	uint	m_uSize;
-};
+
 
 class CStack : public CBuffer
 {
-	inline CStack( char* pBuffer, uint uSize );
+public:
+	CStack(){}
+	inline CStack( char* pBuffer, uint uSize )
+		:m_pStack(pBuffer),m_uSize(uSize)
+	{}
+private:
+	char* m_pStack;
+	uint m_uSize;
 
 };
+
 
 class CContext
 {
 public:
-	CContext( CBuffer const& );
+	CContext( CBuffer const&  oStack)
+	{}
 private:
 	// Members
-	t_offset m_PC;
+	uint m_PC;  //offset
 	CStack m_oStack;
 };
+
 
 
 class CContextManager
@@ -70,9 +68,9 @@ public:
 	// constructor and destructor
 	CContextManager();
 	~CContextManager();
-
-	CContextManager( const CContextManager& ) = delete;
-	CContextManager& operator=(const CContextManager&) = delete;
+private:
+	CContextManager( const CContextManager& );
+	CContextManager& operator=(const CContextManager&);
 
 public:
 	CContext* Alloc( uint uStackSize );
@@ -89,7 +87,7 @@ private:
 
 
 ////////////////////////////////////////////////////////////////////////////////////
-} // namespace
+} // namespace vm
 ////////////////////////////////////////////////////////////////////////////////////
 
 

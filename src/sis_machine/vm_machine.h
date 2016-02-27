@@ -7,7 +7,7 @@
 //
 #include "vm_launcher.h"
 
-// STD Includes
+// STL Includes
 #include <iostream>
 #include <string>
 #include <map>

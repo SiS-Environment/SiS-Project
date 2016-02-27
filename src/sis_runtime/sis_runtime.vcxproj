@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="vm_buffer.h" />
     <ClInclude Include="vm_contextmanager.h" />
     <ClInclude Include="vm_controller.h" />
     <ClInclude Include="vm_modulemanager.h" />
