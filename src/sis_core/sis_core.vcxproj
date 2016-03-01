@@ -145,6 +145,10 @@
     <ClInclude Include="sis_event.h" />
     <ClInclude Include="sis_event_impl.h" />
     <ClInclude Include="sis_module.h" />
+    <ClInclude Include="sis_buffer.h" />
+    <ClInclude Include="sis_context.h" />
+    <ClInclude Include="sis_function.h" />
+    <ClInclude Include="sis_object.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
