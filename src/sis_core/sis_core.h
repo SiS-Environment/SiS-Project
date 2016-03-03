@@ -6,6 +6,10 @@
 //	Includes
 //
 #include "sis_core_global.h"
+#include "sis_buffer.h"
+#include "sis_module.h"
+#include "sis_function.h"
+#include "sis_context.h"
 
 // STL Includes
 #include <memory>
