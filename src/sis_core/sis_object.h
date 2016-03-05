@@ -21,9 +21,9 @@ namespace sis {
 // CRefCounter
 // Implements Generic reference counter
 //
-class CRefCounter
+class SIS_CORE_EXPORT CRefCounter
 {
-public :
+public:
 	// Default constructor (inits counter with 0)
 	inline CRefCounter() = default;
 	// Special constructor (inits counter with 1)
@@ -59,7 +59,7 @@ private:
 // CObject
 // Base class for all vm managed objects 
 //
-class CObject 
+class SIS_CORE_EXPORT CObject
 {
 public:
 	// Default constructor
@@ -83,7 +83,7 @@ private:
 // CObjectRef
 // Reference to Object (automatically increaes decreases ref counter)
 //
-class CObjectRef
+class SIS_CORE_EXPORT CObjectRef
 {
 public:
 	// Default constructor

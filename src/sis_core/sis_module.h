@@ -23,7 +23,7 @@ namespace sis {
 //
 // class CModule
 //
-class CModule final
+class SIS_CORE_EXPORT CModule final
 {
 public:
 	// Type definitions
@@ -34,7 +34,7 @@ public:// Constructor, Destructor
 
 public:// Interface Methodes
 	inline void Run();
-	static SIS_CORE_API void Run(std::string const& strExecuteFilePath);
+	static void Run(std::string const& strExecuteFilePath);
 
 private:// Contents
 	std::string const m_cstrExecuteFilePath;
@@ -45,7 +45,7 @@ private:// Contents
 //
 // class CModuleRef
 //
-class CModuleRef final
+class SIS_CORE_EXPORT CModuleRef final
 {
 public:
 	// Constructor, Destructor
