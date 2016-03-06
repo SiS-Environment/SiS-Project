@@ -6,7 +6,7 @@
 //	Includes
 //
 #include "sis_core_global.h"
-
+#include "sis_referance.h"
 // STL Includes
 #include <atomic>
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,32 +83,8 @@ private:
 // CObjectRef
 // Reference to Object (automatically increaes decreases ref counter)
 //
-class SIS_CORE_EXPORT CObjectRef
-{
-public:
-	// Default constructor
-	inline CObjectRef();
-	// destructor
-	inline ~CObjectRef() = default;
-
-public:
-	// Interface
-	//inline bool IsNull() const;
-	//inline CObject* operator*();
-	//inline CObject const* operator*() const;
-	//inline CObject* operator->();
-	//inline CObject const* operator->() const;
-
-	inline operator CObject&();
-	inline operator CObject const&() const;
-
-	template<typename T> inline operator T&(); 
-	template<typename T> inline operator T const&() const;
-
-private:
-	// Contents
-	CObject*	m_pObject;
-};
+typedef CReferance<CObject> CObjectRef;
+//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////// Implementing Inline Methods //////////////////////////////////////////////

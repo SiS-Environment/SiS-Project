@@ -140,15 +140,19 @@
     <ClCompile Include="sis_module.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sis_core.h" />
+    <ClInclude Include="sis_context_imp.h" />
     <ClInclude Include="sis_core_global.h" />
     <ClInclude Include="sis_event.h" />
     <ClInclude Include="sis_event_impl.h" />
+    <ClInclude Include="sis_global_macros.h" />
+    <ClInclude Include="sis_global_types.h" />
     <ClInclude Include="sis_module.h" />
     <ClInclude Include="sis_buffer.h" />
     <ClInclude Include="sis_context.h" />
     <ClInclude Include="sis_function.h" />
     <ClInclude Include="sis_object.h" />
+    <ClInclude Include="sis_referance.h" />
+    <ClInclude Include="sis_referance_imp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

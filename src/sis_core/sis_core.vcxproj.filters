@@ -9,12 +9,11 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Events">
       <UniqueIdentifier>{af14421c-30c8-47ce-b6c7-4b64b25624bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sis_core">
+      <UniqueIdentifier>{b709387f-3f73-4501-aed7-572686ed838a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -32,13 +31,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sis_core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sis_module.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sis_core_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sis_event.h">
@@ -57,6 +50,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sis_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_global_types.h">
+      <Filter>sis_core</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_global_macros.h">
+      <Filter>sis_core</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_core_global.h">
+      <Filter>sis_core</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_referance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_referance_imp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_context_imp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

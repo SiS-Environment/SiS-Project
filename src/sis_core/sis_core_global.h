@@ -14,13 +14,16 @@
 
 // STL Includes
 #include <memory>
+#include <string>
+#include <vector>
+#include <list>
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 #ifdef SIS_CORE_LIB
 #	define SIS_CORE_EXPORT SIS_EXPORT
 #else
-#	define SIS_CORE_EXPORT
+#	define SIS_CORE_EXPORT SIS_IMPORT
 #endif
 
 

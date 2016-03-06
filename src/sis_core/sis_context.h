@@ -21,42 +21,41 @@ public:
 	//
 	//	Type definitions
 	//
-	class CStack : public CBuffer
+	class SIS_CORE_EXPORT CStack : public CBuffer
 	{
 	public:
-		CStack()
-		{
-		}
-		inline CStack( char* pBuffer, uint uSize )
-			:m_pStack( pBuffer ), m_uSize( uSize )
-		{
-		}
-	private:
-		char* m_pStack;
-		uint m_uSize;
+		inline CStack();
+		inline CStack( byte* pBuffer, uint64 uSize );
 
+	private:
+		byte* m_pStack;
 	};
 
+public:
+	// Constructor
+	inline CContext( CBuffer const& oStack );
 
 public:
-	CContext( CBuffer const&  oStack );
+	// Interface methods
+	inline CStack& Stack();
+	inline CStack const& Stack() const;
 
-	inline CStack& stack();
-	inline CStack const& stack() const;
-
-	inline void IncrementPC( uint uOffset );
+	inline void IncrementPC( uint64 uOffset );
 
 private:
 	// Members
-	uint m_PC;  //offset
+	uint64 m_PC;  //offset
 	CFunction m_oFunc;
-
 	CStack m_oStack;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////
 } // namespace sis
 ////////////////////////////////////////////////////////////////////////////////////
+
+
+// include inl impl
+//#include "sis_context_imp.h"
 
 
 #endif // SIS_CONTEXT_H

@@ -6,10 +6,8 @@
 //	Includes
 //
 #include "sis_core_global.h"
-
-// STL Includes
-#include <iostream>
-#include <string>
+#include "sis_referance.h"
+//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 typedef unsigned int uint;
@@ -32,11 +30,13 @@ public:// Constructor, Destructor
 	inline CModule( std::string const& strExecuteFilePath = std::string() );
 	~CModule() = default;
 
-public:// Interface Methodes
+public:
+	// Interface Methodes
 	inline void Run();
 	static void Run(std::string const& strExecuteFilePath);
 
-private:// Contents
+private:
+	// Contents
 	std::string const m_cstrExecuteFilePath;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,19 +45,8 @@ private:// Contents
 //
 // class CModuleRef
 //
-class SIS_CORE_EXPORT CModuleRef final
-{
-public:
-	// Constructor, Destructor
-	inline CModuleRef( CModule* );
-	~CModuleRef() = default;
-
-public:
-	// Interface Methodes
-
-private:// Contents
-	CModule* m_pModule;
-};
+typedef CReferance<CModule> CModuleRef;
+//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////// Implementing Inline Methods //////////////////////////////////////////////

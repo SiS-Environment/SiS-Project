@@ -18,28 +18,41 @@ namespace sis {
 class SIS_CORE_EXPORT CBuffer
 {
 public:
-/////////////////////////////////////////////////////////////
+	// Constructor and destructor
 	CBuffer( uint nSize = 0 )
 	{
-		m_pBuffer=new char[m_uSize];
+		m_pBuffer = new byte[m_uSize];
 	}
+
 	~CBuffer()
 	{
 		delete m_pBuffer;
 	}
-//	inline CBuffer( char* pBuffer, uint uSize );
+
+	// Copy contructor and assginment operator
+	CBuffer( CBuffer const& ) = delete;
+	CBuffer& operator=( CBuffer const& ) = delete;
+
 public:
-	inline char& operator[]( uint i )
+	inline byte& operator[]( uint64 i )
 	{
 		return m_pBuffer[i];
 	}
-	inline uint getSize() const
+
+	inline byte const& operator[]( uint64 i ) const
+	{
+		return m_pBuffer[i];
+	}
+
+	inline uint64 GetSize() const
 	{
 		return m_uSize;
 	}
+
 private:
-	char*	m_pBuffer;
-	uint	m_uSize;
+	// Members
+	byte*	m_pBuffer;
+	uint64	m_uSize;
 };
 
 

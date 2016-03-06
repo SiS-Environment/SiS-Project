@@ -24,7 +24,7 @@ CContext* CContextManager::Alloc( uint uStackSize )
 	if ( uBlockSize <= m_oBuffer.getSize() - m_uMarker)
 	{
 		char* p = &m_oBuffer[m_uMarker];
-		CStack oStack( p, uStackSize );
+		CContext::CStack oStack( p, uStackSize );
 		pContext = new (p)CContext( oStack );
 		m_uMarker += uBlockSize;
 		m_oBuffer[m_uMarker-1] = uBlockSize;

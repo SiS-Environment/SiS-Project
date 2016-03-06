@@ -8,9 +8,11 @@
 #ifdef _WIN32 || _WIN64
 #	ifndef SIS_EXPORT
 #		define SIS_EXPORT	__declspec(dllexport)
+#		define SIS_IMPORT	__declspec(dllimport)
 #	endif
 #else
 #	define SIS_EXPORT
+#	define SIS_IMPORT
 #endif
 //
 //////////////////////////////////////////////////////////////////////////////////

@@ -24,7 +24,7 @@ namespace vm {
 //
 // class CModuleManager
 //
-class CModuleManager final
+class SIS_RUNTIME_EXPORT CModuleManager final
 {
 public:// Constructor, Destructor
 	inline CModuleManager( std::string const& strExecuteFilePath = std::string() );
@@ -32,7 +32,7 @@ public:// Constructor, Destructor
 
 public:// Interface Methods
 	inline void Run();
-	static SIS_RUNTIME_API void Run( std::string const& strExecuteFilePath );
+	static void Run( std::string const& strExecuteFilePath );
 
 private:// Contents
 	std::string const m_cstrExecuteFilePath;

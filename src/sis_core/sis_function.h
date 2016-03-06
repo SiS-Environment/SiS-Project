@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////////////////////
 //	includes
 //
+#include "sis_core_global.h"
 #include "sis_buffer.h"
 #include "sis_module.h"
 //
@@ -14,25 +15,22 @@
 namespace sis {
 ////////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////////
-//
-typedef unsigned int uint;
-//
-////////////////////////////////////////////////////////////////////////////
+
+class IExpression;
 
 
-
-class CFunction
+class SIS_CORE_EXPORT CFunction
 {
 public:
 	CFunction( CModuleRef, CModule::FuncId );
 
+public:
 	IExpression* GetExpression( uint nOffset );
 
 private:
 	// Members
-	uint		m_nPos;
-	uint		m_nSize;
+	uint64		m_nPos;
+	uint64		m_nSize;
 	CModuleRef	m_oModule;
 };
 
@@ -42,3 +40,4 @@ private:
 
 
 #endif // SIS_FUNCTION_H
+// end of file
