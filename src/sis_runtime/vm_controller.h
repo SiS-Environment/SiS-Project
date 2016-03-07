@@ -4,7 +4,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	Includes
 //
-
+#include <sis_module.h>
+#include "vm_modulemanager.h"
 //STL
 #include <vector>
 //
@@ -26,21 +27,55 @@ class CProcessor;
 //
 class CController
 {
-public: // constructors, destructor
-	CController();
-	~CController();
+public:
+	// constructors, destructor
+	CController() = default;
+	~CController() = default;
 
 	// copy constructor and assignment operator
-	CController( const CController& ) = delete;
-	CController& operator=( const CController& ) = delete;
+	CController( CController const& ) = delete;
+	CController& operator=( CController const& ) = delete;
 
-public: //	interface methods
-	void Start( /*args*/ );
+public:
+	// Interface methods
+	void Start( CModuleManager* pModuleManager )
+	{
+		// TODO
+
+		CModuleRef oModule = pModuleManager->GetStartModule();
+		try
+		{
+			RunNewProcessor( oModule );
+		}
+		catch ( ... )
+		{
+
+		}
+	}
+
+	void RunNewProcessor( CModuleRef oModule )
+	{
+		CProcessor* pProcessor = CreateProcessor();
+		try
+		{
+			pProcessor->Run( oModule );
+		}
+		catch ( NEWPROC )
+		{
+			RunNewProcessor( m_pModuleManager->GetModule( NEWPROC->ModuleName ) );
+		}
+		catch ( ENDPROC )
+		{
+			// EndProcessor( pProc );
+		}
+	}
 
 private:
 	CProcessor* CreateProcessor();
 
-private: // members 
+private:
+	// Members 
+	CModuleManager* m_pModuleManager;
 	std::vector<CProcessor*> m_arrProcessors;
 
 };

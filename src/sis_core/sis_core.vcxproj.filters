@@ -17,9 +17,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sis_core.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="sis_module.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -44,9 +41,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sis_context.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sis_function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sis_object.h">

@@ -25,18 +25,19 @@ private:
 	//
 	//	satic members
 	//	
-	static const uint s_cuSize; // size of one mb
+	static const uint64 s_cuSize;		// size of one mb
 
 public:
-	// constructor and destructor
+	// Constructor and destructor
 	CContextManager();
 	~CContextManager();
-private:
-	CContextManager( const CContextManager& );
-	CContextManager& operator=(const CContextManager&);
+
+	// Copy constructor and assignment operator
+	CContextManager( const CContextManager& ) = delete;
+	CContextManager& operator=(const CContextManager&) = delete;
 
 public:
-	CContext* Alloc( uint uStackSize );
+	CContext* Alloc( uint64 uStackSize );
 	void Free( CContext* );
 
 private:
@@ -44,7 +45,7 @@ private:
 	//	members
 	//
 	CBuffer m_oBuffer;
-	uint m_uMarker;
+	uint64 m_uMarker;
 
 };
 
@@ -52,11 +53,9 @@ private:
 ////////////////////////////////////////////////////////////////////////////////////
 } // namespace vm
 ////////////////////////////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////////////////////////////////
 } // namespace sis
 ////////////////////////////////////////////////////////////////////////////////////
 
 
 #endif // CONTEXT_MANAGER
+// end of file

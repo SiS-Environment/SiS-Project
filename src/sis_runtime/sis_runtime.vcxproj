@@ -23,7 +23,6 @@
     <ClInclude Include="vm_controller.h" />
     <ClInclude Include="vm_modulemanager.h" />
     <ClInclude Include="vm_launcher.h" />
-    <ClInclude Include="vm_object.h" />
     <ClInclude Include="vm_processor.h" />
     <ClInclude Include="vm_runtime_global.h" />
   </ItemGroup>

@@ -6,7 +6,6 @@
 //
 #include "sis_core_global.h"
 #include "sis_buffer.h"
-#include "sis_function.h"
 //
 ////////////////////////////////////////////////////////////////////////////
 
@@ -41,11 +40,11 @@ public:
 	inline CStack const& Stack() const;
 
 	inline void IncrementPC( uint64 uOffset );
+	inline offset GetPC() const;
 
 private:
 	// Members
-	uint64 m_PC;  //offset
-	CFunction m_oFunc;
+	offset m_PC;		// offset
 	CStack m_oStack;
 };
 
