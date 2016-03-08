@@ -23,7 +23,7 @@ class CContextManager
 {
 private:
 	//
-	//	satic members
+	//	static members
 	//	
 	static const uint64 s_cuSize;		// size of one mb
 
