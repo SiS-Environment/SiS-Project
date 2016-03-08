@@ -3,6 +3,7 @@
 //	Includes
 //
 #include "vm_processor.h"
+#include "vm_modulemanager.h"
 #include "vm_contextmanager.h"
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,36 +20,39 @@ CProcessor::CProcessor( CModuleManager* pModuleManager )
 	: m_pModuleManager( pModuleManager ),
 	  m_oContextManager()
 {
-	//
+	if ( nullptr == m_pModuleManager )
+		throw - 1;	// TOOD
 }
 
 
 
 void CProcessor::Run( std::string const& sModuleName )
 {
-	LoadModule( sModuleName );
+	LoadModule( sModuleName, 0 );
 }
 
 
 void CProcessor::Enter( CModuleRef oModule, CContext* pContext )
 {
 	offset uOffset = 0;
-	while ( true )
+	IExpression* pExpression = nullptr;
+	do
 	{
-		IExpression* pExpression = oModule.GetExpression( pContext->GetPC() );
+		pExpression = oModule.GetExpression( pContext->GetPC() );
 		uOffset = pExression->Eval( pContext );
 		pContext = m_oContextManager.Current();
 		pContext->IncrementPC( uOffset );
 	}
+	while ( true );
 }
 
 
 void CProcessor::LoadModule( std::string const& sModuleName, offset uOffset )
 {
 	CModuleRef oModule = m_pModuleManager->GetModule( sModuleName );
-	
+
 	if ( 0 == uOffset )
-		uOffset = oModule->GetEntryPoint( );
+		uOffset = oModule->GetEntryPoint();
 
 	CContext* pContext = m_oContextManager.Current();
 	pContext->IncrementPC( uOffset );

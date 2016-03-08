@@ -1,5 +1,5 @@
-#ifndef SIS_REFERANCE_H
-#define SIS_REFERANCE_H
+#ifndef SIS_REFERENCE_H
+#define SIS_REFERENCE_H
 
 //////////////////////////////////////////////////////////////////////////////////
 //	includes
@@ -14,24 +14,31 @@ namespace sis {
 
 
 //////////////////////////////////////////////////////////////////////////////////
-// Template class for referance
+// Template class for reference
 //
 template <typename T>
-class CReferance final
+class CReference final
 {
 public:
 	// Constructors and destructor
-	inline CReferance( T* );
-	inline ~CReferance() = default;
+	inline CReference( T* );
+	inline ~CReference() = default;
 
 	// Copy constructor and assignment operator
-	inline CReferance( CReferance const& ) = delete;
-	inline CReferance& operator=( CReferance const& ) = delete;
+	inline CReference( CReference const& );
+	inline CReference& operator=( CReference const& );
 
 public:
 	// Cast operator
-	inline operator CReferance&();
-	inline operator CReferance const&() const;
+	inline operator T&();
+	inline operator T const&() const;
+
+	// Data access operator
+	inline T& operator*();
+	inline T const& operator*() const;
+
+	inline T* operator->();
+	inline const T* operator->() const;
 
 private:
 	// Members
@@ -45,8 +52,8 @@ private:
 //////////////////////////////////////////////////////////////////////////////////
 
 
-// include implemantation
-#include "sis_referance_imp.h"
+// include implementation
+#include "sis_reference_imp.h"
 
 
 #endif // SIS_REFERANCE_H

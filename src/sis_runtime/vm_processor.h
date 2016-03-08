@@ -2,13 +2,12 @@
 #define VM_PROCESSOR_H
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//	inlcudes
+//	Includes
 //
 #include "vm_runtime_global.h"
 #include "vm_contextmanager.h"
 #include "sis_context.h"
 #include "sis_module.h"
-#include "vm_modulemanager.h"
 // STL
 #include <string>
 //
@@ -23,6 +22,7 @@ namespace vm {
 
 
 class IExpression;
+class CModuleManager;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,7 +33,7 @@ class CProcessor
 public:
 	// Constructors, destructor
 	CProcessor( CModuleManager* pModuleManager );
-	~CProcessor() = delete;
+	inline ~CProcessor() = default;
 
 	// Copy constructor and assignment operator
 	CProcessor( const CProcessor& ) = delete;
@@ -42,18 +42,17 @@ public:
 public:
 	//	Interface methods
 	void Run( std::string const& sModuleName );
-
-	// TODO will be added StepInto, StepOver and StepOut functions for debuging
+	void Stop();
 
 private:
+	// 
 	void Enter( CModuleRef, CContext* );
-	void LoadModule( std::string const& sModuleName, offset uOffset = 0 );
+	void LoadModule( std::string const& sModuleName, offset uOffset );
 
 private:
-	//
+	//	Members
 	CModuleManager* m_pModuleManager;
 	CContextManager m_oContextManager;
-
 };
 //	CController
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -55,13 +55,13 @@
     <ClInclude Include="sis_core_global.h">
       <Filter>sis_core</Filter>
     </ClInclude>
-    <ClInclude Include="sis_referance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="sis_referance_imp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="sis_context_imp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_reference.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_reference_imp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

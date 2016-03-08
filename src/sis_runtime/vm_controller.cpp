@@ -3,7 +3,10 @@
 //	Includes
 //
 #include "vm_controller.h"
+#include "vm_modulemanager.h"
 #include "vm_processor.h"
+// STL
+#include <algorithm>
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,12 +20,66 @@ namespace vm {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-CController::CController()
+CController::CController( CModuleManager* pModuleManager )
+	: m_pModuleManager( pModuleManager ),
+	  m_arrProcessors()
 {
+	if ( nullptr == m_pModuleManager )
+		throw -1; // TODO
 }
 
 
 CController::~CController()
+{
+	KillAll();
+}
+
+
+CProcessor* CController::CreateProcessor()
+{
+	CProcessor *pProcessor = new CProcessor( m_pModuleManager );
+	m_arrProcessors.push_back( pProcessor ); 
+
+	return pProcessor;
+}
+
+
+void CController::Start( CModuleManager* pModuleManager )
+{
+	if ( nullptr == pModuleManager )
+		throw -1; // TODO
+
+	CModuleRef oModule = pModuleManager->GetStartModule();
+	try
+	{
+		RunNewProcessor( oModule );
+	}
+	catch ( ... )
+	{
+
+	}
+}
+
+
+void CController::RunNewProcessor( CModuleRef oModule )
+{
+	CProcessor* pProcessor = CreateProcessor();
+	try
+	{
+		pProcessor->Run( oModule );
+	}
+	catch ( NEWPROC )
+	{
+		RunNewProcessor( m_pModuleManager->GetModule( NEWPROC->ModuleName ) );
+	}
+	catch ( ENDPROC )
+	{
+		KillProcessor( pProcessor );
+	}
+}
+
+
+void CController::KillAll()
 {
 	while ( !m_arrProcessors.empty() )
 	{
@@ -35,20 +92,17 @@ CController::~CController()
 }
 
 
-CProcessor* CController::CreateProcessor()
+void CController::KillProcessor( CProcessor* pProcessor )
 {
-	CProcessor *pProcessor = new CProcessor;
-	m_arrProcessors.push_back( pProcessor );
+	if ( nullptr == pProcessor )
+		return;
 
-	return pProcessor;
-}
-
-
-void CController::Start( /*args*/ )
-{
-	// get entry point
-	CProcessor* pProcessor = CreateProcessor();
-	// TODO
+	std::vector<CProcessor*>::iterator iter = std::find( m_arrProcessors.begin(), m_arrProcessors.end(), pProcessor );
+	if ( m_arrProcessors.end() != iter )
+	{
+		m_arrProcessors.erase( iter );
+		delete pProcessor;
+	}
 }
 
 

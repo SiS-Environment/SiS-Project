@@ -6,7 +6,7 @@
 //	Includes
 //
 #include "sis_core_global.h"
-#include "sis_referance.h"
+#include "sis_reference.h"
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +29,7 @@ public:// Constructor, Destructor
 	~CModule() = default;
 
 public:
-	// Interface Methodes
+	// Interface Methods
 	inline void Run();
 
 public:
@@ -46,7 +46,7 @@ private:
 //
 // class CModuleRef
 //
-typedef CReferance<CModule> CModuleRef;
+typedef CReference<CModule> CModuleRef;
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -62,7 +62,7 @@ inline CModule::CModule( std::string const& strExecuteFilePath )
 	: m_cstrExecuteFilePath( strExecuteFilePath )
 {}
 
-// Interface Methodes
+// Interface Methods
 inline void CModule::Run()
 {
 	Run( m_cstrExecuteFilePath );

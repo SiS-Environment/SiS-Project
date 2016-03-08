@@ -149,8 +149,8 @@
     <ClInclude Include="sis_buffer.h" />
     <ClInclude Include="sis_context.h" />
     <ClInclude Include="sis_object.h" />
-    <ClInclude Include="sis_referance.h" />
-    <ClInclude Include="sis_referance_imp.h" />
+    <ClInclude Include="sis_reference.h" />
+    <ClInclude Include="sis_reference_imp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
