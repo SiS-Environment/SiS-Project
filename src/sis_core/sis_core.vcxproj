@@ -134,7 +134,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="sis_core_global.cpp" />
     <ClCompile Include="sis_event.cpp" />
     <ClCompile Include="sis_module.cpp" />
   </ItemGroup>
@@ -143,6 +142,8 @@
     <ClInclude Include="sis_core_global.h" />
     <ClInclude Include="sis_event.h" />
     <ClInclude Include="sis_event_impl.h" />
+    <ClInclude Include="sis_expression.h" />
+    <ClInclude Include="sis_expressionbuilder.h" />
     <ClInclude Include="sis_global_macros.h" />
     <ClInclude Include="sis_global_types.h" />
     <ClInclude Include="sis_module.h" />
@@ -151,6 +152,8 @@
     <ClInclude Include="sis_object.h" />
     <ClInclude Include="sis_reference.h" />
     <ClInclude Include="sis_reference_imp.h" />
+    <ClInclude Include="sis_result.h" />
+    <ClInclude Include="sis_types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

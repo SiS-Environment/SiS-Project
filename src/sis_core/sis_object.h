@@ -6,7 +6,8 @@
 //	Includes
 //
 #include "sis_core_global.h"
-#include "sis_referance.h"
+#include "sis_reference.h"
+
 // STL Includes
 #include <atomic>
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,20 +24,25 @@ namespace sis {
 //
 class SIS_CORE_EXPORT CRefCounter
 {
+public:// Types
+	struct One {};
+
 public:
 	// Default constructor (inits counter with 0)
 	inline CRefCounter() = default;
 	// Special constructor (inits counter with 1)
-	struct One {};
 	inline CRefCounter( One const& );
 
+	inline ~CRefCounter() = default;
+
+public:// Interface Methods
 	// Atomically increments the value of this counter.
 	inline void AddRef();
-
 	// Atomically decrements the value of this QAtomicInt.
 	// Returns true if the previous value is non - zero, false otherwise.
 	inline bool DeRef();
 
+public:// Operators
 	// Returns true if counter > 0, false otherwise (counter == 0)
 	inline operator bool() const;
 
@@ -51,8 +57,6 @@ private:
 	std::atomic_uint	m_nCount;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -83,7 +87,7 @@ private:
 // CObjectRef
 // Reference to Object (automatically increaes decreases ref counter)
 //
-typedef CReferance<CObject> CObjectRef;
+typedef CReference<CObject> CObjectRef;
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

@@ -12,15 +12,15 @@
     <Filter Include="Events">
       <UniqueIdentifier>{af14421c-30c8-47ce-b6c7-4b64b25624bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="sis_core">
-      <UniqueIdentifier>{b709387f-3f73-4501-aed7-572686ed838a}</UniqueIdentifier>
+    <Filter Include="Expression">
+      <UniqueIdentifier>{1274a49a-8018-42e8-b7fb-4165a5494cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{575f3ad9-bc84-4ac7-8256-44e14e7dce22}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sis_module.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="sis_core_global.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="sis_event.cpp">
@@ -46,15 +46,6 @@
     <ClInclude Include="sis_object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sis_global_types.h">
-      <Filter>sis_core</Filter>
-    </ClInclude>
-    <ClInclude Include="sis_global_macros.h">
-      <Filter>sis_core</Filter>
-    </ClInclude>
-    <ClInclude Include="sis_core_global.h">
-      <Filter>sis_core</Filter>
-    </ClInclude>
     <ClInclude Include="sis_context_imp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -62,6 +53,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sis_reference_imp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_expression.h">
+      <Filter>Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_expressionbuilder.h">
+      <Filter>Expression</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_result.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_core_global.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_global_macros.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_global_types.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="sis_types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

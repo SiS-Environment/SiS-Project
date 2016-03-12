@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="vm_contextmanager.h" />
     <ClInclude Include="vm_controller.h" />
+    <ClInclude Include="vm_expressionmanager.h" />
     <ClInclude Include="vm_modulemanager.h" />
     <ClInclude Include="vm_launcher.h" />
     <ClInclude Include="vm_processor.h" />

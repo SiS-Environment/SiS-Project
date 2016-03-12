@@ -20,7 +20,6 @@ inline CContext::CStack::CStack( byte* pBuffer, uint64 uSize )
 
 inline CContext::CContext( CBuffer const&  oStack )
 	: m_PC( 0 ),
-	  m_oFunc(),
 	  m_oStack( oStack )
 {
 

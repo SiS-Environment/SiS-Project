@@ -13,10 +13,10 @@
 //#include "sis_context.h"
 
 // STL Includes
-#include <memory>
-#include <string>
-#include <vector>
 #include <list>
+#include <vector>
+#include <string>
+#include <memory>
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
