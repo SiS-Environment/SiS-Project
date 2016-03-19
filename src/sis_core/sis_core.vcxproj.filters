@@ -73,8 +73,5 @@
     <ClInclude Include="sis_global_types.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="sis_types.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

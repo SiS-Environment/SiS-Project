@@ -40,8 +40,9 @@ public:// Interface Methods
 	inline CModuleRef const& ModuleRef() const;
 
 	// Result
-	inline CResult& Result();
-	inline CResult const& Result() const;
+	inline IResult* Result();
+	inline IResult const* Result() const;
+	inline void SetResult(IResult* pResult);
 
 	// PC
 	inline offset& PC();
@@ -51,7 +52,7 @@ public:// Interface Methods
 
 private:// Contents
 	CModuleRef m_module;
-	CResult m_result;
+	IResult* m_result;
 
 	CStack m_stack;
 	offset m_PC;

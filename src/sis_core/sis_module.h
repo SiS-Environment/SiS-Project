@@ -36,7 +36,7 @@ public:// Static Methods
 
 public:// Interface Methods
 	inline void Run();
-	inline IExpression* GetExpression(char* pBegin);
+	inline IExpression* GetExpression(byte* pBegin);
 
 private:// Contents
 	std::string const m_cstrExecuteFilePath;

@@ -22,12 +22,12 @@ class SIS_CORE_EXPORT IExpressionBuilder
 public:// Constructor, Destructor
 	inline IExpressionBuilder() = default;
 
-	~IExpressionBuilder() = default;
+	virtual ~IExpressionBuilder() = default;
 
 public:// Static Methods
 
 public:// Interface Methods
-	virtual IExpression* GetExpression(byte*) = 0;
+	virtual IExpression* GetExpression(byte* pBegin) = 0;
 
 private:// Contents
 

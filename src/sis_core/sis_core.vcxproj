@@ -153,7 +153,6 @@
     <ClInclude Include="sis_reference.h" />
     <ClInclude Include="sis_reference_imp.h" />
     <ClInclude Include="sis_result.h" />
-    <ClInclude Include="sis_types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
