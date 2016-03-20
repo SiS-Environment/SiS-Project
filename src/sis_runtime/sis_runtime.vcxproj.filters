@@ -9,6 +9,9 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Controller">
+      <UniqueIdentifier>{5eae80a1-b51e-457d-b35e-efff87197363}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vm_launcher.h">
@@ -23,14 +26,20 @@
     <ClInclude Include="vm_contextmanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vm_controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="vm_processor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="vm_expressionmanager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vm_controller.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="vm_processor.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="vm_processorevent.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="vm_eventmanager.h">
+      <Filter>Controller</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,10 +56,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="vm_controller.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Controller</Filter>
     </ClCompile>
     <ClCompile Include="vm_processor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="vm_processorevent.cpp">
+      <Filter>Controller</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

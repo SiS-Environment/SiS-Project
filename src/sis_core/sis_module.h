@@ -7,10 +7,13 @@
 //
 #include "sis_core_global.h"
 #include "sis_reference.h"
-#include "sis_expression.h"
-#include "sis_expressionmanager.h"
-
+//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+class IExpression;
+class IExpressionBuilder;
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace sis {
@@ -23,25 +26,29 @@ namespace sis {
 //
 class SIS_CORE_EXPORT CModule final
 {
-public:// Types
+public:
+	// Types
 	typedef uint FuncId;
 
-public:// Constructor, Destructor
+public:
+	// Constructor, Destructor
 	inline CModule( std::string const& strExecuteFilePath = std::string() );
 
 	~CModule() = default;
 
-public:// Static Methods
+public:
+	// Static Methods
 	static void Run(std::string const& strExecuteFilePath);
 
-public:// Interface Methods
+public:
+	// Interface Methods
 	inline void Run();
 	inline IExpression* GetExpression(byte* pBegin);
 
-private:// Contents
+private:
+	// Members
 	std::string const m_cstrExecuteFilePath;
-
-	IExpressionBuilder m_pExpressionBuilder;
+	IExpressionBuilder* m_pExpressionBuilder;
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,7 +57,7 @@ private:// Contents
 // class CModuleRef
 //
 typedef CReference<CModule> CModuleRef;
-
+//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////// Implementing Inline Methods //////////////////////////////////////////////
@@ -78,3 +85,4 @@ inline void CModule::Run()
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #endif // SIS_MODULE_H
+// end of file

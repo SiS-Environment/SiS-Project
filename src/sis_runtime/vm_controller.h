@@ -5,6 +5,7 @@
 //	Includes
 //
 #include "vm_runtime_global.h"
+#include "vm_eventmanager.h"
 #include <sis_module.h>
 //STL
 #include <vector>
@@ -30,12 +31,20 @@ class CModuleManager;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	class CController
 //
-class SIS_RUNTIME_EXPORT CController
+class SIS_RUNTIME_EXPORT CController final : public CProceEventManager
 {
+private:
+	enum class EState : char
+	{
+		NotStarted,
+		Running,
+		Breaked,
+	};
+
 public:
 	// Constructors, destructor
 	CController( CModuleManager* pModuleManager );
-	~CController();
+	virtual ~CController();
 
 	// Copy constructor and assignment operator
 	CController( CController const& ) = delete;
@@ -43,10 +52,17 @@ public:
 
 public:
 	// Interface methods
-	void Start();
-	void RunNewProcessor( CModuleRef oModule );
 
+	// Start running
+	void Start();
+	// Create new processor and run it
+	void RunNewProcessor( std::string const& sModuleName );
+	// Delete all processes
 	void KillAll();
+
+protected:
+	// Handle events
+	virtual void HandleEvents() override;
 	
 private:
 	// Create new processor
@@ -58,7 +74,6 @@ private:
 	// Members
 	CModuleManager* m_pModuleManager;
 	std::vector<CProcessor*> m_arrProcessors;
-
 };
 //	CController
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

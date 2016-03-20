@@ -21,7 +21,8 @@ namespace vm {
 
 
 CController::CController( CModuleManager* pModuleManager )
-	: m_pModuleManager( pModuleManager ),
+	: CProceEventManager(),
+	  m_pModuleManager( pModuleManager ),
 	  m_arrProcessors()
 {
 	if ( nullptr == m_pModuleManager )
@@ -37,45 +38,24 @@ CController::~CController()
 
 CProcessor* CController::CreateProcessor()
 {
-	CProcessor *pProcessor = new CProcessor( m_pModuleManager );
+	CProcessor* pProcessor = new CProcessor( m_pModuleManager, this );
 	m_arrProcessors.push_back( pProcessor ); 
 
 	return pProcessor;
 }
 
 
-void CController::Start( CModuleManager* pModuleManager )
+void CController::Start()
 {
-	if ( nullptr == pModuleManager )
-		throw -1; // TODO
-
-	CModuleRef oModule = pModuleManager->GetStartModule();
-	try
-	{
-		RunNewProcessor( oModule );
-	}
-	catch ( ... )
-	{
-
-	}
+	std::string sMainModule = m_pModuleManager->GetMainModuleName();
+	RunNewProcessor( sMainModule );
 }
 
 
-void CController::RunNewProcessor( CModuleRef oModule )
+void CController::RunNewProcessor( std::string const& sModuleName )
 {
 	CProcessor* pProcessor = CreateProcessor();
-	try
-	{
-		pProcessor->Run( oModule );
-	}
-	catch ( NEWPROC )
-	{
-		RunNewProcessor( m_pModuleManager->GetModule( NEWPROC->ModuleName ) );
-	}
-	catch ( ENDPROC )
-	{
-		KillProcessor( pProcessor );
-	}
+	pProcessor->Run( sModuleName );
 }
 
 
@@ -108,8 +88,6 @@ void CController::KillProcessor( CProcessor* pProcessor )
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace vm
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace sis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

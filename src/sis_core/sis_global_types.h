@@ -21,7 +21,7 @@ typedef unsigned long long		uint64;
 //
 typedef uint8					byte;
 typedef uint32					uint;
-typedef uint64					offset;
+typedef int64					offset;
 //
 typedef float					real32;	// ?
 typedef double					real64;	// ?

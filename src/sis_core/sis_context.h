@@ -21,16 +21,19 @@ namespace sis {
 //
 //	class CContext
 //
-class SIS_CORE_EXPORT CContext
+class SIS_CORE_EXPORT CContext final
 {
-public:// Types
+public:
+	// Types
 
-public:// Constructor, Destructor
+public:
+	// Constructor and Destructor
 	inline CContext( CBuffer const& oStack );
+	inline ~CContext() = default;
 
-	~CContext() = default;
-
-public:// Interface Methods
+public:
+	// Interface Methods
+	
 	// Stack
 	inline CStack& Stack();
 	inline CStack const& Stack() const;
@@ -50,7 +53,8 @@ public:// Interface Methods
 	inline offset const& PC() const;
 	inline void IncrementPC( offset uOffset );
 
-private:// Contents
+private:
+	// Members
 	CModuleRef m_module;
 	IResult* m_result;
 
@@ -69,3 +73,4 @@ private:// Contents
 
 
 #endif // SIS_CONTEXT_H
+// end of file

@@ -21,10 +21,12 @@
   <ItemGroup>
     <ClInclude Include="vm_contextmanager.h" />
     <ClInclude Include="vm_controller.h" />
+    <ClInclude Include="vm_eventmanager.h" />
     <ClInclude Include="vm_expressionmanager.h" />
     <ClInclude Include="vm_modulemanager.h" />
     <ClInclude Include="vm_launcher.h" />
     <ClInclude Include="vm_processor.h" />
+    <ClInclude Include="vm_processorevent.h" />
     <ClInclude Include="vm_runtime_global.h" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +35,7 @@
     <ClCompile Include="vm_modulemanager.cpp" />
     <ClCompile Include="vm_launcher.cpp" />
     <ClCompile Include="vm_processor.cpp" />
+    <ClCompile Include="vm_processorevent.cpp" />
     <ClCompile Include="vm_runtime_global.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
