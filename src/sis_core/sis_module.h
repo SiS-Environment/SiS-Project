@@ -43,7 +43,7 @@ public:
 public:
 	// Interface Methods
 	inline void Run();
-	inline IExpression* GetExpression(byte* pBegin);
+	inline IExpression* GetExpression(offset nBegin);
 
 private:
 	// Members

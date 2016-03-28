@@ -5,6 +5,7 @@
 //	Includes
 //
 #include "vm_runtime_global.h"
+#include "vm_event.h"
 #include <sis_core.h>
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,77 +21,21 @@ namespace vm {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-enum class EProcEventType
+class SIS_RUNTIME_EXPORT CProcEvent : public CVMEvent
 {
-	LoadModul = 1,
-	Exeption = 2,
-	NewProcessor = 3,
-
-	// Events for debugging
-	Break = 4,
-	Continue = 5,
-	StepIn = 6,
-	StepOver = 7,
-	StepOut = 8,
-	Stop = 9,
-};
-
-
-class SIS_RUNTIME_EXPORT CProcEvent
-{
-protected:
-	typedef EProcEventType type;
-
 public:
 	// Constructor and destructor
 	inline CProcEvent( type eType )
-		: m_eType( eType ),
-		  m_bAccepted( false )
-	{ 
+		: CVMEvent( eType )
+	{
 	}
 	virtual ~CProcEvent() = default;
 
-public:
-	// Interface methods
-	inline type Type() const
-	{
-		return m_eType;
-	}
-	
-	inline void SetAccepted( bool bAccepted )
-	{
-		m_bAccepted = bAccepted;
-	}
-	inline void Accept( CProcessor* pProcessor )
-	{
-		if ( nullptr != pProcessor )
-		{
-			Eval( pProcessor );
-			SetAccepted( true );
-		}
-	}
-	inline void Ignore()
-	{
-		SetAccepted( false );
-	}
-
-	inline bool IsAccepted() const
-	{
-		return m_bAccepted;
-	}
-	inline bool IsIgnored() const
-	{
-		return !IsAccepted();
-	}
-
 protected:
+	// Evaluate action for event manager
+	virtual bool Eval( CVMEventManager* pEventManager ) const override final;
 	// Evaluate action for processor
-	virtual void Eval( CProcessor* pProcessor ) = 0;
-
-private:
-	// Members
-	type m_eType;
-	bool m_bAccepted;
+	virtual void Eval( CProcessor* pProcessor ) const = 0;
 };
 
 
@@ -114,7 +59,7 @@ public:
 
 protected:
 	// Evaluate action for processor
-	virtual void Eval( CProcessor* pProcessor ) const;
+	virtual void Eval( CProcessor* pProcessor ) const override;
 
 private:
 	// Members
@@ -147,7 +92,7 @@ public:
 
 protected:
 	// Evaluate action for processor
-	virtual void Eval( CProcessor* pProcessor ) const;
+	virtual void Eval( CProcessor* pProcessor ) const override;
 
 private:
 	// Members
@@ -168,7 +113,7 @@ public:
 
 protected:
 	// Evaluate action for processor
-	virtual void Eval( CProcessor* pProcessor ) const;
+	virtual void Eval( CProcessor* pProcessor ) const override;
 };
 
 
@@ -184,7 +129,7 @@ public:
 
 protected:
 	// Evaluate action for processor
-	virtual void Eval( CProcessor* pProcessor ) const;
+	virtual void Eval( CProcessor* pProcessor ) const override;
 };
 
 
@@ -200,7 +145,7 @@ public:
 
 protected:
 	// Evaluate action for processor
-	virtual void Eval( CProcessor* pProcessor ) const;
+	virtual void Eval( CProcessor* pProcessor ) const override;
 };
 
 
@@ -216,7 +161,7 @@ public:
 
 protected:
 	// Evaluate action for processor
-	virtual void Eval( CProcessor* pProcessor ) const;
+	virtual void Eval( CProcessor* pProcessor ) const override;
 };
 
 
@@ -233,7 +178,7 @@ public:
 
 protected:
 	// Evaluate action for processor
-	virtual void Eval( CProcessor* pProcessor ) const;
+	virtual void Eval( CProcessor* pProcessor ) const override;
 
 private:
 	// Members

@@ -3,6 +3,7 @@
 //	Includes
 //
 #include "sis_module.h"
+#include "sis_expression.h"
 // STL
 #include <iostream>
 //

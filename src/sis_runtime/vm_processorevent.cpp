@@ -15,6 +15,21 @@ namespace vm {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+bool CProcEvent::Eval( CVMEventManager* pEventManager ) const
+{
+	if ( nullptr == pEventManager )
+		return false;
+
+	CProcessor* pProcessor = dynamic_cast<CProcessor*>( pEventManager );
+	if ( nullptr == pProcessor )
+		return false;
+	else
+		Eval( pProcessor );
+
+	return true;
+}
+
+
 void CBreakEvent::Eval( CProcessor* pProcessor ) const
 {
 	pProcessor->Stop();

@@ -41,6 +41,9 @@
     <ClInclude Include="vm_eventmanager.h">
       <Filter>Controller</Filter>
     </ClInclude>
+    <ClInclude Include="vm_event.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vm_launcher.cpp">

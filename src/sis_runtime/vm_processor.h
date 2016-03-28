@@ -32,7 +32,7 @@ class CController;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	class CProcessor
 //
-class CProcessor final : public CProceEventManager
+class CProcessor final : public CVMEventManager
 {
 public:
 	// Constructors, destructor
@@ -82,8 +82,7 @@ private:
 	CController* m_pController;
 	CModuleManager* m_pModuleManager;
 	CContextManager m_oContextManager;
-
-	std::stack<CModuleRef> m_stackModule;
+	bool m_bKeepRunning;
 };
 //	CController
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

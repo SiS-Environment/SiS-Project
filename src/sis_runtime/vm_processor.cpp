@@ -6,6 +6,7 @@
 #include "vm_controller.h"
 #include "vm_modulemanager.h"
 #include "vm_contextmanager.h"
+#include <sis_expression.h>
 // STL
 #include <thread>
 #include <chrono>
@@ -21,10 +22,11 @@ namespace vm {
 
 
 CProcessor::CProcessor( CModuleManager* pModuleManager, CController* pController )
-	: CProceEventManager(),
+	: CVMEventManager(),
 	  m_pController( pController ),
 	  m_pModuleManager( pModuleManager ),
-	  m_oContextManager()
+	  m_oContextManager(),
+	  m_bKeepRunning( true )
 {
 	if ( nullptr == m_pController || nullptr == m_pModuleManager )
 		throw - 1;	// TOOD
@@ -40,57 +42,47 @@ void CProcessor::Run( std::string const& sModuleName )
 
 void CProcessor::Enter()
 {
-	if ( m_stackModule.empty() )
-		throw - 1; // TODO
-
-	CModuleRef oModule = m_stackModule.top();
 	offset uOffset = 0;
 	CContext* pContext = nullptr;
 	IExpression* pExpression = nullptr;
+	m_bKeepRunning = true;
 	do
 	{
-		HandleEvents();
-
 		pContext = m_oContextManager.Current();
 		pContext->IncrementPC( uOffset );
-		pExpression = oModule.GetExpression( pContext->GetPC() );
+		pExpression = pContext->ModuleRef()->GetExpression( pContext->GetPC() );
 		uOffset = pExression->Eval( pContext );
+
+		HandleEvents();
 	}
-	while ( true );
+	while ( m_bKeepRunning );
 }
 
 
 void CProcessor::EnterDebug()
 {
-	if ( m_stackModule.empty() )
-		throw - 1; // TODO
-
-	CModuleRef oModule = m_stackModule.top();
 	offset uOffset = 0;
 	CContext* pContext = nullptr;
 	IExpression* pExpression = nullptr;
+	m_bKeepRunning = true;
 	do
 	{
-		CheckBreakPoint();
-		HandleEvents();
-
 		pContext = m_oContextManager.Current();
 		pContext->IncrementPC( uOffset );
-		pExpression = oModule.GetExpression( pContext->GetPC() );
+		pExpression = pContext->ModuleRef()->GetExpression( pContext->GetPC() );
 		uOffset = pExression->Eval( pContext );
+
+		CheckBreakPoint();
+		HandleEvents();
 	}
-	while ( true );
+	while ( m_bKeepRunning );
 }
 
 
 void CProcessor::StepIn()
 {
-	if ( m_stackModule.empty() )
-		throw - 1; // TODO
-
-	CModuleRef oModule = m_stackModule.top();
 	CContext* pContext = m_oContextManager.Current();
-	IExpression* pExpression = oModule.GetExpression( pContext->GetPC() );
+	IExpression* pExpression = pContext->ModuleRef()->GetExpression( pContext->GetPC( ) );
 	offset uOffset = pExpression->Eval();
 	pContext->IncrementPC( uOffset );
 }
@@ -119,21 +111,18 @@ void CProcessor::StepOver()
 void CProcessor::LoadModule( std::string const& sModuleName, offset uOffset )
 {
 	CModuleRef oModule = m_pModuleManager->GetModule( sModuleName );
-	m_stackModule.push( oModule );
 	if ( -1 == uOffset )
 		uOffset = oModule->GetMain();
 
 	CContext* pContext = m_oContextManager.Current();
 	pContext->IncrementPC( uOffset );
 	Enter();
-
-	m_stackModule.pop();
 }
 
 
 void CProcessor::Stop()
 {
-	std::this_thread::sleep_for( std::chrono::seconds( 1 ) );
+	m_bKeepRunning = false;
 }
 
 

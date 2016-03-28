@@ -1,14 +1,16 @@
-#ifndef VM_EVENT_MANAGER_H
-#define VM_EVENT_MANAGER_H
+#ifndef VM_EVENT_H
+#define VM_EVENT_H
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	Includes
 //
-#include "vm_processorevent.h"
-// STL
-#include <queue>
+#include "vm_runtime_global.h"
+#include <sis_core.h>
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+class CVMEventManager;
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -18,42 +20,77 @@ namespace vm {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-class SIS_RUNTIME_EXPORT CVMEventManager
+enum class EVMEventType
 {
-public:
-	// Constructors and destructor
-	CVMEventManager() = default;
-	virtual ~CVMEventManager()
-	{
-		while ( !m_queEvents.empty() )
-		{
-			CProcEvent* pEvent = m_queEvents.front();
-			delete pEvent;
-			m_queEvents.pop();
-		}
-	}
+	LoadModul = 1,
+	Exeption = 2,
+	NewProcessor = 3,
 
-	// Copy constructor and assignment operator
-	CVMEventManager( CVMEventManager const& ) = delete;
-	CVMEventManager& operator=( CVMEventManager const& ) = delete;
-
-public:
-	// Add event to event manager
-	void AddEvent( CProcEvent* pEvent )
-	{
-		if ( nullptr != pEvent )
-			m_queEvents.push( pEvent );
-	}
-
-protected:
-	// Handle events
-	virtual void HandleEvents() = 0;
-
-protected:
-	// Members
-	std::queue<CProcEvent*> m_queEvents;
+	// Events for debugging
+	Break = 4,
+	Continue = 5,
+	StepIn = 6,
+	StepOver = 7,
+	StepOut = 8,
+	Stop = 9,
 };
 
+
+class SIS_RUNTIME_EXPORT CVMEvent
+{
+protected:
+	typedef EVMEventType type;
+
+public:
+	// Constructor and destructor
+	inline CVMEvent( type eType )
+		: m_eType( eType ),
+		m_bAccepted( false )
+	{
+	}
+	virtual ~CVMEvent() = default;
+
+public:
+	// Interface methods
+
+	inline type Type() const
+	{
+		return m_eType;
+	}
+	
+	inline void SetAccepted( bool bAccepted )
+	{
+		m_bAccepted = bAccepted;
+	}
+	inline void Accept( CVMEventManager* pEventManager )
+	{
+		bool bSuccess = Eval( pEventManager );
+		SetAccepted( bSuccess );
+	}
+
+	inline void Ignore()
+	{
+		SetAccepted( false );
+	}
+
+	inline bool IsAccepted() const
+	{
+		return m_bAccepted;
+	}
+	inline bool IsIgnored() const
+	{
+		return !IsAccepted( );
+	}
+
+protected:
+	// Evaluate action for processor
+	virtual bool Eval( CVMEventManager* pEventManager ) const = 0;
+
+private:
+	// Members
+	type m_eType;
+	bool m_bAccepted;
+};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace vm
@@ -61,6 +98,6 @@ protected:
 } // namespace sis
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-#endif // VM_EVENT_MANAGER_H
+
+#endif // VM_EVENT_H
 // end of file
- 
