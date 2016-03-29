@@ -47,9 +47,7 @@ private:
 	uint64 m_firstFreeMarker; 
 	uint64 m_secondFreeMarker;
 	uint64 m_thirdFreeMarker;
-	std::vector<CObject*> mp_objFirst;
-	std::vector<CObject*> mp_objSecond;
-	std::vector<CObject*> mp_objThird;
+	std::vector<CObject*> mv_objPointers;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
