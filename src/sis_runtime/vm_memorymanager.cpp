@@ -13,9 +13,7 @@ CMemoryManager::CMemoryManager()
 	 mp_bufFirst = new CBuffer(buf_size);
 	 mp_bufSecond = new CBuffer(buf_size);
 	 mp_bufThird = new CBuffer(buf_size);
-	 mp_objFirst = new std::vector(CObject*);
-	 mp_objSecond = new std::vector(CObject*);
-	 mp_objThird = new std::vector(CObject*);
+	 mv_objPointers = new std::vector(CObject*);
 	 m_firstFreeMarker = m_secondFreeMarker = m_thirdFreeMarker = 0;
 }
 
@@ -25,8 +23,8 @@ CMemoryManager::Type& m_New(Args... args)
 	if(sizeof(Type) > buf_size - m_firstFreeMarker)
 		m_GC(1);
 	CObject* p_newObject = new (mp_bufFirst+m_firstFreeMarker) Type(args); ////////// operator+ for buffer
-	mp_objFirst.push_back(p_newObject);
-	return *((Type*)(p_newObject));
+	mp_objFirst.push_back(p_newObject);////not push back
+	return *((Type*)(p_newObject));///must return (Type*)(*mv_objPointer[*mv_objPointer[0]])
 }
 
 void CMemoryManager::m_GC(int level)
@@ -44,9 +42,8 @@ CMemoryManager::~CMemoryManager()
 	delete mp_bufFirst;
 	delete mp_bufSecond;
 	delete mp_bufThird;
-	delete [] mp_objFirst;
-	delete [] mp_objSecond;
-	delete [] mp_objThird;
+	delete [] mv_objPointers;
+	
 
 }	
 	
