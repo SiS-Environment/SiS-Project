@@ -55,7 +55,6 @@ CMemoryManager::~CMemoryManager()
 	delete mp_bufFirst;
 	delete mp_bufSecond;
 	delete mp_bufThird;
-	delete [] mv_objPointers;
 	
 
 }	
