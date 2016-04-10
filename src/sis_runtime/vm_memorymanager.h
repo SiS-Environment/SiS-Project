@@ -10,6 +10,7 @@
 // STL
 #include <iostream>
 #include <vector>
+#include <utility>
 
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,6 +35,7 @@ public:
 	////////// Interface methods///
 	template <typename Type,typename... Args>
 	Type& m_New(Args... args);
+	CObject* m_Object(uint64);
 
 private:
 	////////Private methods///
@@ -48,7 +50,7 @@ private:
 	uint64 m_firstFreeMarker; 
 	uint64 m_secondFreeMarker;
 	uint64 m_thirdFreeMarker;
-	std::vector<CObject*> mv_objPointers;
+	std::vector<std::pair<uint8, CObject*> > mv_objPointers;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
