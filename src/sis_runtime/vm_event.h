@@ -5,7 +5,10 @@
 //	Includes
 //
 #include "vm_runtime_global.h"
+//
 #include <sis_core.h>
+// STL
+#include <atomic>
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,8 +48,9 @@ public:
 	// Constructor and destructor
 	inline CVMEvent( type eType )
 		: m_eType( eType ),
-		m_bAccepted( false )
+		  m_bAccepted()
 	{
+		m_bAccepted = false;
 	}
 	virtual ~CVMEvent() = default;
 
@@ -89,7 +93,7 @@ protected:
 private:
 	// Members
 	type m_eType;
-	bool m_bAccepted;
+	std::atomic_bool m_bAccepted;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -19,11 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="vm_breakpoint.h" />
     <ClInclude Include="vm_contextmanager.h" />
     <ClInclude Include="vm_controller.h" />
     <ClInclude Include="vm_event.h" />
     <ClInclude Include="vm_eventmanager.h" />
     <ClInclude Include="vm_expressionmanager.h" />
+    <ClInclude Include="vm_memorymanager.h" />
     <ClInclude Include="vm_modulemanager.h" />
     <ClInclude Include="vm_launcher.h" />
     <ClInclude Include="vm_processor.h" />
@@ -33,6 +35,8 @@
   <ItemGroup>
     <ClCompile Include="vm_contextmanager.cpp" />
     <ClCompile Include="vm_controller.cpp" />
+    <ClCompile Include="vm_debugger.cpp" />
+    <ClCompile Include="vm_memorymanager.cpp" />
     <ClCompile Include="vm_modulemanager.cpp" />
     <ClCompile Include="vm_launcher.cpp" />
     <ClCompile Include="vm_processor.cpp" />

@@ -5,6 +5,8 @@
 //	Includes
 //
 #include "dbg_debugger_global.h"
+//
+#include <sis_listener.h>
 #include <vm_controller.h>
 //
 //////////////////////////////////////////////////////////////////////////////////
@@ -18,14 +20,22 @@ namespace dbg {
 
 
 //////////////////////////////////////////////////////////////////////////////////
+//	Type definitions
+//
+typedef vm::CController::IDebugger IDebugger;
+//
+//////////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////////
 //	class Debugger
 //
-class SIS_DEBUGER_EXPORT CDebugger final
+class SIS_DEBUGER_EXPORT CDebugger final : public IListener
 {
 public:
 	// Constructors and destructor
-	CDebugger( vm::CController* );
-	~CDebugger() = default;
+	CDebugger( IDebugger* );
+	virtual ~CDebugger() = default;
 
 	// Copy constructor and assignment operator
 	CDebugger( CDebugger const& ) = delete;
@@ -33,13 +43,10 @@ public:
 
 public:
 	// Interface methods
-	void Start();
-	void StepInto();
-	void StepOver();
 
 private:
 	// Members
-	vm::CController* m_pController;
+	IDebugger* m_pDebugger;
 };
 
 

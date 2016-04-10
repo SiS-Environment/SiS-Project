@@ -6,10 +6,8 @@
 #include "vm_controller.h"
 #include "vm_modulemanager.h"
 #include "vm_contextmanager.h"
+//
 #include <sis_expression.h>
-// STL
-#include <thread>
-#include <chrono>
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -23,24 +21,35 @@ namespace vm {
 
 CProcessor::CProcessor( CModuleManager* pModuleManager, CController* pController )
 	: CVMEventManager(),
+	  m_oThread(),
 	  m_pController( pController ),
 	  m_pModuleManager( pModuleManager ),
 	  m_oContextManager(),
-	  m_bKeepRunning( true )
+	  m_bKeepRunning()
 {
-	if ( nullptr == m_pController || nullptr == m_pModuleManager )
-		throw - 1;	// TOOD
+	m_bKeepRunning = true;
+	SIS_CHECKPTR( m_pController );
+	SIS_CHECKPTR( m_pModuleManager );
 }
 
 
-
-void CProcessor::Run( std::string const& sModuleName )
+CProcessor::~CProcessor()
 {
-	LoadModule( sModuleName );
+	if ( m_oThread.joinable() )
+		m_oThread.join();
 }
 
 
-void CProcessor::Enter()
+void CProcessor::Run( bool bDebug )
+{
+	if ( bDebug )
+		EnterDebug();
+	else
+		Enter();
+}
+
+
+void CProcessor::_Enter()
 {
 	offset uOffset = 0;
 	CContext* pContext = nullptr;
@@ -48,18 +57,16 @@ void CProcessor::Enter()
 	m_bKeepRunning = true;
 	do
 	{
-		pContext = m_oContextManager.Current();
+		pContext = m_oContextManager.GetCurrent();
 		pContext->IncrementPC( uOffset );
 		pExpression = pContext->ModuleRef()->GetExpression( pContext->GetPC() );
-		uOffset = pExression->Eval( pContext );
-
-		HandleEvents();
+		uOffset = pExpression->Eval( pContext );
 	}
-	while ( m_bKeepRunning );
+	while ( IsRunning() );
 }
 
 
-void CProcessor::EnterDebug()
+void CProcessor::_EnterDebug()
 {
 	offset uOffset = 0;
 	CContext* pContext = nullptr;
@@ -67,28 +74,28 @@ void CProcessor::EnterDebug()
 	m_bKeepRunning = true;
 	do
 	{
-		pContext = m_oContextManager.Current();
+		pContext = m_oContextManager.GetCurrent();
 		pContext->IncrementPC( uOffset );
 		pExpression = pContext->ModuleRef()->GetExpression( pContext->GetPC() );
-		uOffset = pExression->Eval( pContext );
+		uOffset = pExpression->Eval( pContext );
 
+		// Check break point
 		CheckBreakPoint();
-		HandleEvents();
 	}
-	while ( m_bKeepRunning );
+	while ( IsRunning() );
 }
 
 
-void CProcessor::StepIn()
+void CProcessor::_StepIn()
 {
-	CContext* pContext = m_oContextManager.Current();
-	IExpression* pExpression = pContext->ModuleRef()->GetExpression( pContext->GetPC( ) );
-	offset uOffset = pExpression->Eval();
+	CContext* pContext = m_oContextManager.GetCurrent();
+	IExpression* pExpression = pContext->ModuleRef()->GetExpression( pContext->GetPC() );
+	offset uOffset = pExpression->Eval( pContext );
 	pContext->IncrementPC( uOffset );
 }
 
 
-void CProcessor::StepOut()
+void CProcessor::_StepOut()
 {
 	uint64 const cuContextCount = m_oContextManager.GetContextCount();
 	do
@@ -99,7 +106,7 @@ void CProcessor::StepOut()
 }
 
 
-void CProcessor::StepOver()
+void CProcessor::_StepOver()
 {
 	uint64 const cuContextCount = m_oContextManager.GetContextCount( );
 	StepIn();
@@ -108,25 +115,15 @@ void CProcessor::StepOver()
 }
 
 
-void CProcessor::LoadModule( std::string const& sModuleName, offset uOffset )
-{
-	CModuleRef oModule = m_pModuleManager->GetModule( sModuleName );
-	if ( -1 == uOffset )
-		uOffset = oModule->GetMain();
-
-	CContext* pContext = m_oContextManager.Current();
-	pContext->IncrementPC( uOffset );
-	Enter();
-}
-
-
-void CProcessor::Stop()
+void CProcessor::_Stop()
 {
 	m_bKeepRunning = false;
+	if ( m_oThread.joinable() )
+		m_oThread.join();
 }
 
 
-void CProcessor::Continue()
+void CProcessor::_Continue()
 {
 	EnterDebug();
 }

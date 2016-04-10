@@ -43,61 +43,15 @@ class SIS_RUNTIME_EXPORT CBreakEvent : public CProcEvent
 {
 public:
 	// Constructor and destructor
-	inline CBreakEvent( uint64 uLine )
-		: CProcEvent( type::Break ),
-		  m_cuLine( uLine )
+	inline CBreakEvent( )
+		: CProcEvent( type::Break )
 	{
 	}
 	virtual ~CBreakEvent() = default;
 
-public:
-	// Interface methods
-	inline uint64 GetLine() const
-	{
-		return m_cuLine;
-	}
-
 protected:
 	// Evaluate action for processor
 	virtual void Eval( CProcessor* pProcessor ) const override;
-
-private:
-	// Members
-	uint64 const m_cuLine;
-};
-
-
-class SIS_RUNTIME_EXPORT CLoadModulEvent final : public CProcEvent
-{
-public:
-	// Constructor and destructor
-	inline CLoadModulEvent( std::string const& sModuleName, offset uOffset )
-		: CProcEvent( type::LoadModul ),
-		  m_csModuleName( sModuleName ),
-		  m_cuOffset( uOffset )
-	{
-	}
-	virtual ~CLoadModulEvent() = default;
-
-public:
-	// Interface methods
-	inline std::string const& ModuleName() const
-	{ 
-		return m_csModuleName;
-	}
-	inline offset GetOffset() const
-	{
-		return m_cuOffset;
-	}
-
-protected:
-	// Evaluate action for processor
-	virtual void Eval( CProcessor* pProcessor ) const override;
-
-private:
-	// Members
-	std::string const m_csModuleName;
-	offset const m_cuOffset;
 };
 
 
@@ -169,9 +123,9 @@ class SIS_RUNTIME_EXPORT CNewProcessorEvent final : public CProcEvent
 {
 public:
 	// Constructor and destructor
-	inline CNewProcessorEvent( std::string const& sModuleName )
+	inline CNewProcessorEvent( CModuleRef oModule )
 		: CProcEvent( type::NewProcessor ),
-	      m_csModule( sModuleName )
+	      m_oModule( oModule )
 	{
 	}
 	virtual ~CNewProcessorEvent() = default;
@@ -182,7 +136,7 @@ protected:
 
 private:
 	// Members
-	std::string const m_csModule;
+	CModuleRef m_oModule;
 };
 
 

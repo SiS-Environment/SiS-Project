@@ -44,6 +44,12 @@
     <ClInclude Include="vm_event.h">
       <Filter>Controller</Filter>
     </ClInclude>
+    <ClInclude Include="vm_memorymanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vm_breakpoint.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vm_launcher.cpp">
@@ -65,6 +71,12 @@
       <Filter>Controller</Filter>
     </ClCompile>
     <ClCompile Include="vm_processorevent.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="vm_memorymanager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vm_debugger.cpp">
       <Filter>Controller</Filter>
     </ClCompile>
   </ItemGroup>

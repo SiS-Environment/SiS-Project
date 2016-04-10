@@ -146,6 +146,7 @@
     <ClInclude Include="sis_expressionbuilder.h" />
     <ClInclude Include="sis_global_macros.h" />
     <ClInclude Include="sis_global_types.h" />
+    <ClInclude Include="sis_listener.h" />
     <ClInclude Include="sis_module.h" />
     <ClInclude Include="sis_buffer.h" />
     <ClInclude Include="sis_context.h" />

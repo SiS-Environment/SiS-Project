@@ -36,12 +36,6 @@ void CBreakEvent::Eval( CProcessor* pProcessor ) const
 }
 
 
-void CLoadModulEvent::Eval( CProcessor* pProcessor ) const
-{
-	pProcessor->LoadModule( m_csModuleName, m_cuOffset );
-}
-
-
 void CContinueEvent::Eval( CProcessor* pProcessor ) const
 {
 	pProcessor->Continue();
@@ -70,7 +64,7 @@ void CNewProcessorEvent::Eval( CProcessor* pProcessor ) const
 {
 	CController* pController = pProcessor->GetContoller();
 	if ( nullptr != pController )
-		pController->RunNewProcessor( m_csModule );
+		pController->RunNewProcessor();
 }
 
 

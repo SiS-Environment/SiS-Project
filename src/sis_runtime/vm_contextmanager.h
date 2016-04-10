@@ -23,7 +23,7 @@ class CContextManager
 {
 private:
 	//
-	//	static members
+	//	Static members
 	//	
 	static const uint64 s_cuSize;		// size of one mb
 
@@ -37,16 +37,18 @@ public:
 	CContextManager& operator=(const CContextManager&) = delete;
 
 public:
+	// Interface methods
+
 	CContext* Alloc( uint64 uStackSize );
 	void Free( CContext* );
 
+	inline CContext* GetCurrent() const;	// TODO
+	inline uint64 GetContextCount() const;	// TODO
+
 private:
-	//
-	//	members
-	//
+	// Members
 	CBuffer m_oBuffer;
 	uint64 m_uMarker;
-
 };
 
 
