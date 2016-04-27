@@ -8,6 +8,7 @@
 // STL
 #include <iostream>
 #include <stack>
+#include <stdexcept>
 //
 ////////////////////////////////////////////////////////////////////////////
 
@@ -42,13 +43,15 @@ public:
 	CContext* Alloc( uint64 uStackSize );
 	void Free( CContext* );
 
-	inline CContext* GetCurrent() const;	// TODO
-	inline uint64 GetContextCount() const;	// TODO
+	inline CContext* GetCurrent() const;	
+	inline uint64 GetContextCount() const;	
 
 private:
 	// Members
-	CBuffer m_oBuffer;
-	uint64 m_uMarker;
+	std::stack<CBuffer> m_oBuffer;
+	std::stack<uint64> m_uMarker;
+	CContext* mp_currContext;
+	uint64 m_contextCount;
 };
 
 
