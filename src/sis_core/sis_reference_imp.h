@@ -11,9 +11,7 @@ namespace sis {
 template <typename T>
 inline CReference<T>::CReference( T* pContent )
 {
-	if ( nullptr == pContent )
-		throw -1; // TODO
-
+	SIS_CHECKPTR( pContent );
 	m_pContent = pContent;
 }
 

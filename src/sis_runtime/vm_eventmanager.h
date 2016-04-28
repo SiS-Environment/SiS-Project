@@ -58,7 +58,7 @@ public:
 	// Add event to event manager
 	void AddEvent( CProcEvent* pEvent )
 	{
-		if ( nullptr != pEvent )
+		if ( nullptr != pEvent ) // TODO : Sync
 			m_queEvents.push( pEvent );
 	}
 

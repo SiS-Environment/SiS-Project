@@ -26,7 +26,7 @@ private:
 	//
 	//	Static members
 	//	
-	static const uint64 s_cuSize;		// size of one mb
+	static const uint64 s_cuSize;		// size of one MB
 
 public:
 	// Constructor and destructor
@@ -50,8 +50,8 @@ private:
 	// Members
 	std::stack<CBuffer> m_oBuffer;
 	std::stack<uint64> m_uMarker;
-	CContext* mp_currContext;
-	uint64 m_contextCount;
+	CContext* m_pCurrContext;
+	uint64 m_uContextCount;
 };
 
 
