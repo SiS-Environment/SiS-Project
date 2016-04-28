@@ -1,8 +1,6 @@
 #ifndef VM_MEMORY_MANAGER_H
 #define VM_MEMORY_MANAGER_H
 
-#define buf_size 64*1024
-#define vec_size 100000
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	includes
 //
@@ -25,6 +23,10 @@ namespace vm {
 
 class CMemoryManager
 {
+private:
+	//	Static members
+	static const uint64 s_cuBuffSize;
+	static const uint64 s_cuVecSize;
 public: 
 	/////////////// Constructor, Destructor/////////////////
 	CMemoryManager();
