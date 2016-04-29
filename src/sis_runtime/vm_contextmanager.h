@@ -34,8 +34,8 @@ public:
 	~CContextManager();
 
 	// Copy constructor and assignment operator
-	CContextManager( const CContextManager& ) = delete;
-	CContextManager& operator=(const CContextManager&) = delete;
+	CContextManager( CContextManager const& ) = delete;
+	CContextManager& operator=( CContextManager const& ) = delete;
 
 public:
 	// Interface methods
@@ -48,8 +48,8 @@ public:
 
 private:
 	// Members
-	std::stack<CBuffer> m_oBuffer;
-	std::stack<uint64> m_uMarker;
+	std::stack<CBuffer> m_stackBuffer;
+	std::stack<uint64> m_stackMarker;
 	CContext* m_pCurrContext;
 	uint64 m_uContextCount;
 };

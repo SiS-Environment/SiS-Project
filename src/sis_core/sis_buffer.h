@@ -19,22 +19,37 @@ namespace sis {
 //
 class SIS_CORE_EXPORT CBuffer
 {
-public:// Constructors, Destructor
-	inline CBuffer( uint nSize = 0 ) { m_pBuffer = new byte[m_uSize]; }
+public:
+	// Constructors, Destructor
+	inline explicit CBuffer( uint64 uSize = 0 )
+		: m_pBuffer( nullptr ),
+		  m_uSize( uSize )
+	{
+		m_pBuffer = new byte[m_uSize];
+	}
+	inline CBuffer( byte* pBuffer, uint64 uSize = 0 )
+		: m_pBuffer( pBuffer ),
+		  m_uSize( uSize )
+	{
+		SIS_CHECKPTR( m_pBuffer );
+	}
 
 	inline ~CBuffer() { delete[] m_pBuffer; }
 
 	CBuffer( CBuffer const& ) = delete;
 	CBuffer& operator=( CBuffer const& ) = delete;
 
-public:// Interface Methods
+public:
+	// Interface Methods
 	inline uint64 GetSize() const {	return m_uSize;	}
 
-public:// Operators
+public:
+	// Operators
 	inline byte& operator[]( uint64 i ) { return m_pBuffer[i]; }
 	inline byte const& operator[]( uint64 i ) const { return m_pBuffer[i]; }
 
-private:// Contents
+private:
+	// Contents
 	byte*	m_pBuffer;
 	uint64	m_uSize;
 };
