@@ -12,6 +12,9 @@
     <Filter Include="Controller">
       <UniqueIdentifier>{5eae80a1-b51e-457d-b35e-efff87197363}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Controller\Memory File">
+      <UniqueIdentifier>{45bf391f-d0e6-4450-99a1-6c7065d98525}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="vm_launcher.h">
@@ -41,8 +44,8 @@
     <ClInclude Include="vm_eventmanager.h">
       <Filter>Controller</Filter>
     </ClInclude>
-    <ClInclude Include="vm_event.h">
-      <Filter>Controller</Filter>
+    <ClInclude Include="vm_memorymanager.h">
+      <Filter>Controller\Memory File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -66,6 +69,9 @@
     </ClCompile>
     <ClCompile Include="vm_processorevent.cpp">
       <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="vm_memorymanager.cpp">
+      <Filter>Controller\Memory File</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
