@@ -4,7 +4,7 @@
 //
 #include "vm_launcher.h"
 
-// STD Inclueds
+// STD Includes
 #include <iostream>
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,14 +13,13 @@
 //
 // MAIN
 //
-int main(int argc, char* argv[])
+int main( int argc, char* argv[] )
 {
 	std::string strExecuteFilePath;
 	for (int i = 0; i < argc; ++i)
 	{
 		strExecuteFilePath += argv[i];
 	}
-
 	sis::vm::CLauncher::Run( strExecuteFilePath );
 
 	system( "pause" );

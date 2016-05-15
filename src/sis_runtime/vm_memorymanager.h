@@ -1,7 +1,6 @@
 #ifndef VM_MEMORY_MANAGER_H
 #define VM_MEMORY_MANAGER_H
 
-#define buf_size 64*1024
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	includes
 //
@@ -9,6 +8,7 @@
 // STL
 #include <iostream>
 #include <vector>
+#include <utility>
 
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,6 +23,10 @@ namespace vm {
 
 class CMemoryManager
 {
+private:
+	//	Static members
+	static const uint64 s_cuBuffSize;
+	static const uint64 s_cuVecSize;
 public: 
 	/////////////// Constructor, Destructor/////////////////
 	CMemoryManager();
@@ -33,6 +37,7 @@ public:
 	////////// Interface methods///
 	template <typename Type,typename... Args>
 	Type& m_New(Args... args);
+	CObject* m_Object(uint64);
 
 private:
 	////////Private methods///
@@ -47,7 +52,7 @@ private:
 	uint64 m_firstFreeMarker; 
 	uint64 m_secondFreeMarker;
 	uint64 m_thirdFreeMarker;
-	std::vector<CObject*> mv_objPointers;
+	std::vector<std::pair<uint8, CObject*> > mv_objPointers;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////

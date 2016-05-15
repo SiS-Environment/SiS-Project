@@ -8,6 +8,7 @@
 // STL
 #include <iostream>
 #include <stack>
+#include <stdexcept>
 //
 ////////////////////////////////////////////////////////////////////////////
 
@@ -23,9 +24,9 @@ class CContextManager
 {
 private:
 	//
-	//	static members
+	//	Static members
 	//	
-	static const uint64 s_cuSize;		// size of one mb
+	static const uint64 s_cuSize;		// size of one MB
 
 public:
 	// Constructor and destructor
@@ -33,20 +34,24 @@ public:
 	~CContextManager();
 
 	// Copy constructor and assignment operator
-	CContextManager( const CContextManager& ) = delete;
-	CContextManager& operator=(const CContextManager&) = delete;
+	CContextManager( CContextManager const& ) = delete;
+	CContextManager& operator=( CContextManager const& ) = delete;
 
 public:
+	// Interface methods
+
 	CContext* Alloc( uint64 uStackSize );
 	void Free( CContext* );
 
-private:
-	//
-	//	members
-	//
-	CBuffer m_oBuffer;
-	uint64 m_uMarker;
+	inline CContext* GetCurrent() const;	
+	inline uint64 GetContextCount() const;	
 
+private:
+	// Members
+	std::stack<CBuffer> m_stackBuffer;
+	std::stack<uint64> m_stackMarker;
+	CContext* m_pCurrContext;
+	uint64 m_uContextCount;
 };
 
 

@@ -12,8 +12,13 @@
     <Filter Include="Controller">
       <UniqueIdentifier>{5eae80a1-b51e-457d-b35e-efff87197363}</UniqueIdentifier>
     </Filter>
+<<<<<<< HEAD
     <Filter Include="Controller\Memory File">
       <UniqueIdentifier>{45bf391f-d0e6-4450-99a1-6c7065d98525}</UniqueIdentifier>
+=======
+    <Filter Include="Unit test Files">
+      <UniqueIdentifier>{e8d13960-8afe-4c94-99e8-35be0321cc12}</UniqueIdentifier>
+>>>>>>> origin/master
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -47,6 +52,12 @@
     <ClInclude Include="vm_memorymanager.h">
       <Filter>Controller\Memory File</Filter>
     </ClInclude>
+    <ClInclude Include="vm_memorymanager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="vm_breakpoint.h">
+      <Filter>Controller</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="vm_launcher.cpp">
@@ -71,7 +82,17 @@
       <Filter>Controller</Filter>
     </ClCompile>
     <ClCompile Include="vm_memorymanager.cpp">
+<<<<<<< HEAD
       <Filter>Controller\Memory File</Filter>
+=======
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="vm_debugger.cpp">
+      <Filter>Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="vm_unittest.cpp">
+      <Filter>Source Files</Filter>
+>>>>>>> origin/master
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -13,6 +13,8 @@
 #include <string>
 #include <queue>
 #include <stack>
+#include <thread>
+#include <atomic>
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -20,11 +22,14 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace sis {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class IExpression;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace vm {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-class IExpression;
 class CModuleManager;
 class CController;
 
@@ -37,7 +42,7 @@ class CProcessor final : public CVMEventManager
 public:
 	// Constructors, destructor
 	CProcessor( CModuleManager* pModuleManager, CController* pController );
-	virtual ~CProcessor() = default;
+	virtual ~CProcessor();
 
 	// Copy constructor and assignment operator
 	CProcessor( CProcessor const& ) = delete;
@@ -45,44 +50,92 @@ public:
 
 public:
 	// Interface methods
-	void Run( std::string const& sModuleName );
+
+	// Main function
+	void Run( bool bDebug );
 
 	// Enter to main loop
-	void Enter();
+	inline void Enter()
+	{
+		if ( IsStopped() )
+			m_oThread = std::thread( &CProcessor::_Enter, this );
+	}
 	// Enter to main loop for debug mode
-	void EnterDebug();
+	inline void EnterDebug()
+	{
+		if ( IsStopped() )
+			m_oThread = std::thread( &CProcessor::_EnterDebug, this );
+	}
 
 	// Debugging functions
-	void StepIn();
-	void StepOut();
-	void StepOver();
+	inline void StepIn()
+	{
+		if ( IsStopped() )
+			m_oThread = std::thread( &CProcessor::_StepIn, this );
+	}
+	inline void StepOut()
+	{
+		if ( IsStopped() )
+			m_oThread = std::thread( &CProcessor::_StepOut, this );
+	}
+	inline void StepOver()
+	{
+		if ( IsStopped() )
+			m_oThread = std::thread( &CProcessor::_StepOver, this );
+	}
 
 	// Stop main loop
-	void Stop();
-	void Continue();
-
-	// Load from module
-	void LoadModule( std::string const& sModuleName, offset uOffset = -1 );
+	inline void Stop()
+	{
+		if ( IsRunning() )
+			_Stop();
+	}
+	inline void Continue()
+	{
+		if ( IsStopped() )
+			m_oThread = std::thread( &CProcessor::_Continue, this );
+	}
 
 	// Get controller pointer
-	CController* GetContoller() const
+	inline CController* GetContoller() const
 	{
 		return m_pController;
 	}
 
-private:
+	// Check state
+	inline bool IsRunning() const
+	{
+		return m_bKeepRunning;
+	}
+	inline bool IsStopped() const
+	{
+		return !IsRunning();
+	}
+
+protected:
 	// Handle events
 	virtual void HandleEvents() override;
+
+private:
+	// Helper functions
+	void _Enter();
+	void _EnterDebug();
+	void _StepIn();
+	void _StepOut();
+	void _StepOver();
+	void _Stop();
+	void _Continue();
 
 	// Check breakpoint existence, only for debug mode
 	void CheckBreakPoint();
 
 private:
 	// Members
-	CController* m_pController;
-	CModuleManager* m_pModuleManager;
-	CContextManager m_oContextManager;
-	bool m_bKeepRunning;
+	std::thread			m_oThread;
+	CController*		m_pController;
+	CModuleManager*		m_pModuleManager;
+	CContextManager		m_oContextManager;
+	std::atomic_bool	m_bKeepRunning;
 };
 //	CController
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

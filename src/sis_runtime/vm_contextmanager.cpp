@@ -1,67 +1,82 @@
 #include "vm_contextmanager.h"
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace sis {
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace vm {
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-const size_t CContextManager::s_cuSize = 1048576;
+const uint64 CContextManager::s_cuSize = 1048576;
 
 
 CContextManager::CContextManager()
-	:m_oBuffer(s_cuSize)
 {
-	m_uMarker=0;
+	m_stackBuffer.push( CBuffer( s_cuSize ) );
+	m_stackMarker.push( 0 );
+	m_pCurrContext = nullptr;
+	m_uContextCount = 0;
 }
 
 
-CContext* CContextManager::Alloc( uint uStackSize )
+CContext* CContextManager::Alloc( uint64 uStackSize )
 {
+	if ( uStackSize > s_cuSize )
+		return nullptr; // TODO
+
 	CContext* pContext = nullptr;
-	uint uBlockSize = sizeof( CContext ) + uStackSize + 1;
-	if ( uBlockSize <= m_oBuffer.getSize() - m_uMarker)
+	CBuffer& oBuffer = m_stackBuffer.top();
+	uint64& uMarker = m_stackMarker.top();
+	uint64 uBlockSize = sizeof( CContext ) + uStackSize + 1;
+	if ( uBlockSize <= oBuffer.GetSize() - uMarker)
 	{
-		char* p = &m_oBuffer[m_uMarker];
-		CContext::CStack oStack( p, uStackSize );
+		byte* p = &oBuffer[uMarker];
+		CStack oStack( p, uStackSize );
 		pContext = new (p)CContext( oStack );
-		m_uMarker += uBlockSize;
-		m_oBuffer[m_uMarker-1] = uBlockSize;
+		uMarker += uBlockSize;
+		oBuffer[uMarker-1] = uBlockSize;
 	}
 	else
 	{
-		throw(std::logic_error( "" ));   // TODO
+		m_stackBuffer.push( CBuffer( s_cuSize ) );
+		m_stackMarker.push( 0 );
+		Alloc( uStackSize );
 	}
-	
+	m_pCurrContext = pContext;
+	++m_uContextCount;
 	return pContext;
 }
 
-
-
-
 void CContextManager::Free( CContext* pContext )
 {
-	uint uBlockSize = m_oBuffer[m_uMarker-1];
-	char* pLastBlock = &m_oBuffer[m_uMarker - uBlockSize];
+	CBuffer& oBuffer = m_stackBuffer.top();  
+	uint64& uMarker = m_stackMarker.top();
+	uint64 uBlockSize = oBuffer[uMarker-1];
+	byte* pLastBlock = &oBuffer[uMarker - uBlockSize];
 	if ( (void*)pContext == (void*)pLastBlock )
-	{
-		m_uMarker -= uBlockSize; 
-	}
+		uMarker -= uBlockSize;
 	else
-	{
-		throw(std::logic_error( "" ));    //TODO
-	}
+		throw std::logic_error( "Invalid Context pointer" );
 }
 
+CContext* CContextManager::GetCurrent() const
+{
+	return m_pCurrContext;
+}
+
+uint64 CContextManager::GetContextCount() const
+{
+	return m_uContextCount;
+}
 
 CContextManager::~CContextManager()
 {
 }
 
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace vm
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 } // namespace sis
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
